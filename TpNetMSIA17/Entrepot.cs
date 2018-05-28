@@ -43,7 +43,7 @@ namespace TpNetMSIA17
         public Article ajouteArticle(Article article)
         {
             listeArticle.Add(article);
-            Console.WriteLine("Ajout de l'article " + article.Nom);
+            Console.WriteLine("Ajout de l'article " + article.Nom + "\n");
 
             return article;
         }

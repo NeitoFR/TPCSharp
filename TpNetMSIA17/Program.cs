@@ -11,28 +11,38 @@ namespace TpNetMSIA17
 
         static void Main(string[] args)
         {
-            Caisse caisse = new Caisse(1000F);
-            Console.WriteLine(caisse.Solde);
-            
+            ConsoleKeyInfo reponse;
             int nbArticle;
-
+            Caisse caisse = new Caisse(1000F);
+            Console.WriteLine("Etat de la caisse : " + caisse.Solde);
+           
             do
             {
                 Console.WriteLine("Entrer un nombre d'article : ");
                 Int32.TryParse(Console.ReadLine(), out nbArticle);
             } while (nbArticle < 1 || nbArticle > 30);
 
-            InsertArticle(nbArticle);
+            InsertArticleAuto(nbArticle);
 
             Commande commande = new Commande();
 
-            float achat = commande.Acheter(entrepot.ListeArticle);
+            do
+            {
+                float achat = commande.Acheter(entrepot.ListeArticle);
 
-            caisse.EnleverArgent(achat);
-            Console.WriteLine(caisse.Solde);
-            /*caisse.AjouterArgent(100F);
-            Console.WriteLine(caisse.Solde);*/
-            
+                caisse.EnleverArgent(achat);
+                Console.WriteLine("Etat de la caisse : " + caisse.Solde);
+
+                do
+                {
+                    Console.Write("\nVoulez-vous passer une nouvelle commande ? O/N : ");
+                    reponse = Console.ReadKey();
+                }while ((reponse.Key != ConsoleKey.N) || (reponse.Key != ConsoleKey.O));
+
+
+            } while (reponse.Key != ConsoleKey.N);
+
+
             Console.ReadKey();
         }
 
@@ -65,9 +75,20 @@ namespace TpNetMSIA17
                 {
                     Console.Write("Marge bénéficiaire : ");
                     float.TryParse(Console.ReadLine(), out margeBeneficiaire);
+                    Console.WriteLine();
                 } while (margeBeneficiaire < 1 || margeBeneficiaire > 10);
 
                 entrepot.ajouteArticle(new Article(nom, prix, quantite, margeBeneficiaire));
+            }
+
+            Console.WriteLine(entrepot.AllArticles());
+        }
+
+        private static void InsertArticleAuto(int nbArticle)
+        {
+            for (int nb = 1; nb <= nbArticle; nb++)
+            {
+                entrepot.ajouteArticle(new Article("Article " + nb, 12F, 5, 5F));
             }
 
             Console.WriteLine(entrepot.AllArticles());

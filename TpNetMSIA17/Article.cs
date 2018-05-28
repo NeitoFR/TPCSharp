@@ -75,7 +75,7 @@ namespace TpNetMSIA17
 
         private void afficheCreation(string nom)
         {
-            Console.WriteLine("Creation de l'article " + nom);
+            Console.WriteLine("Création de l'article " + nom);
         }
 
         public string affiche()

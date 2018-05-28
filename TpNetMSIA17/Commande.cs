@@ -14,7 +14,7 @@ namespace TpNetMSIA17
             listeArticleAchete = new List<Article>();
         }
         
-        public static string AllArticleAchete()
+        public string AllArticleAchete()
         {
             string liste = "";
             int index = 1;

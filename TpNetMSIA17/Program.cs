@@ -18,7 +18,7 @@ namespace TpNetMSIA17
            
             do
             {
-                Console.WriteLine("Entrer un nombre d'article : ");
+                Console.WriteLine("\nEntrer un nombre d'article : ");
                 Int32.TryParse(Console.ReadLine(), out nbArticle);
             } while (nbArticle < 1 || nbArticle > 30);
 
@@ -37,7 +37,7 @@ namespace TpNetMSIA17
                 {
                     Console.Write("\nVoulez-vous passer une nouvelle commande ? O/N : ");
                     reponse = Console.ReadKey();
-                }while ((reponse.Key != ConsoleKey.N) || (reponse.Key != ConsoleKey.O));
+                }while ((reponse.Key != ConsoleKey.N) && (reponse.Key != ConsoleKey.O));
 
 
             } while (reponse.Key != ConsoleKey.N);

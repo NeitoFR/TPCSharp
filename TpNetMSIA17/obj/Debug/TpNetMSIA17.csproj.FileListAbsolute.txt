@@ -1,0 +1,6 @@
+c:\users\1839150\documents\visual studio 2015\Projects\TpNetMSIA17\TpNetMSIA17\bin\Debug\TpNetMSIA17.exe.config
+c:\users\1839150\documents\visual studio 2015\Projects\TpNetMSIA17\TpNetMSIA17\bin\Debug\TpNetMSIA17.exe
+c:\users\1839150\documents\visual studio 2015\Projects\TpNetMSIA17\TpNetMSIA17\bin\Debug\TpNetMSIA17.pdb
+c:\users\1839150\documents\visual studio 2015\Projects\TpNetMSIA17\TpNetMSIA17\obj\Debug\TpNetMSIA17.csprojResolveAssemblyReference.cache
+c:\users\1839150\documents\visual studio 2015\Projects\TpNetMSIA17\TpNetMSIA17\obj\Debug\TpNetMSIA17.exe
+c:\users\1839150\documents\visual studio 2015\Projects\TpNetMSIA17\TpNetMSIA17\obj\Debug\TpNetMSIA17.pdb

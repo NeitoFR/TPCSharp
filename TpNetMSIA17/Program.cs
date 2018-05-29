@@ -7,70 +7,81 @@ namespace TpNetMSIA17
 {
     class Program
     {
-        private static Entrepot entrepot = new Entrepot();
-
         static void Main(string[] args)
         {
-            Caisse caisse = new Caisse(1000F);
-            Console.WriteLine(caisse.Solde);
-            
-            int nbArticle;
+            Entrepot ent = new Entrepot();
 
+            Caisse caisse = new Caisse(1000);
+            ConsoleKeyInfo reponse;
             do
             {
-                Console.WriteLine("Entrer un nombre d'article : ");
-                Int32.TryParse(Console.ReadLine(), out nbArticle);
-            } while (nbArticle < 1 || nbArticle > 30);
+                reponse = displayMenu();
 
-            InsertArticle(nbArticle);
+                switch (reponse.Key)
+                {
+                    case ConsoleKey.D1:
+                    case ConsoleKey.NumPad1:
+                        Console.WriteLine("Solde " + caisse.Solde);
+                        break;
+                    case ConsoleKey.D2:
+                    case ConsoleKey.NumPad2:
+                        Console.WriteLine(ent.AllArticles());
+                        break;
+                    case ConsoleKey.D3:
+                    case ConsoleKey.NumPad3:
+                        int nbArticle;
+                        do
+                        {
+                            Console.WriteLine("\nEntrer un nombre d'article : ");
+                            Int32.TryParse(Console.ReadLine(), out nbArticle);
+                        } while (nbArticle < 1 || nbArticle > 30);
+                        ent.InsertArticleAuto(nbArticle);
+                        break;
+                    case ConsoleKey.D4:
+                    case ConsoleKey.NumPad4:
+                        Commande commande = new Commande();
+                        ent.AllArticles();
+                        do
+                        {
+                            float achat = commande.Acheter(ent.ListeArticle);
 
-            Commande commande = new Commande();
+                            caisse.EnleverArgent(achat);
+                            Console.WriteLine("Etat de la caisse : " + caisse.Solde);
 
-            float achat = commande.Acheter(entrepot.ListeArticle);
+                            do
+                            {
+                                Console.Write("\nVoulez-vous passer une nouvelle commande ? O/N : ");
+                                reponse = Console.ReadKey();
+                            } while ((reponse.Key != ConsoleKey.N) && (reponse.Key != ConsoleKey.O));
 
-            caisse.EnleverArgent(achat);
-            Console.WriteLine(caisse.Solde);
-            /*caisse.AjouterArgent(100F);
-            Console.WriteLine(caisse.Solde);*/
-            
-            Console.ReadKey();
+                            Console.WriteLine("\n\nListe des articles de l'entrepot : ");
+                            Console.WriteLine(ent.AllArticles());
+
+                        } while (reponse.Key != ConsoleKey.N);
+                        break;
+                    case ConsoleKey.D5:
+                    case ConsoleKey.NumPad5:
+                        //vente
+                        break;
+                    default:
+                        Console.WriteLine("Choix invalide");
+                        break;
+                }
+            } while (reponse.Key != ConsoleKey.F1);
         }
-
-        private static void  InsertArticle(int nbArticle)
+        static private ConsoleKeyInfo displayMenu()
         {
-            string nom;
-            float prix;
-            int quantite;
-            float margeBeneficiaire;
-
-            for (int nb = 1; nb <= nbArticle; nb++)
-            {
-                Console.WriteLine("Article " + nb + " : ");
-                Console.Write("Nom : ");
-                nom = Console.ReadLine();
-                do
-                {
-                    Console.Write("Prix : ");
-                    float.TryParse(Console.ReadLine(), out prix);
-                } while (prix < 1 || prix > 100);
-
-                do
-                {
-                    Console.Write("Quantité : ");
-                    Int32.TryParse(Console.ReadLine(), out quantite);
-                } while (quantite < 1 || quantite > 10);
-                
-
-                do
-                {
-                    Console.Write("Marge bénéficiaire : ");
-                    float.TryParse(Console.ReadLine(), out margeBeneficiaire);
-                } while (margeBeneficiaire < 1 || margeBeneficiaire > 10);
-
-                entrepot.ajouteArticle(new Article(nom, prix, quantite, margeBeneficiaire));
-            }
-
-            Console.WriteLine(entrepot.AllArticles());
+            ConsoleKeyInfo key;
+            Console.WriteLine("***** Bienvenue sur l\'entrepôt *****");
+            Console.WriteLine("\t1.Consulter solde caisse");
+            Console.WriteLine("\t2.Consulter liste article");
+            Console.WriteLine("\t3.Ajouter des articles");
+            Console.WriteLine("\t4.Acheter des articles");
+            Console.WriteLine("\t5.Vendre des articles");
+            Console.Write("Choix : ");
+            key = Console.ReadKey();
+            Console.Write("\n");
+            return key;
         }
     }
 }

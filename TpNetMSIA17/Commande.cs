@@ -13,10 +13,8 @@ namespace TpNetMSIA17
         {
             listeArticleAchete = new List<Article>();
         }
-
-        //private float solde;
-
-        public static string AllArticleAchete()
+        
+        public string AllArticleAchete()
         {
             string liste = "";
             int index = 1;
@@ -34,10 +32,9 @@ namespace TpNetMSIA17
         {
             int numArticle;
             int quantite;
-            Console.WriteLine("listeArticle.Count : " + listeArticle.Count);
             do
             {
-                Console.Write("Numéro de l'article à acheter : ");
+                Console.Write("\nNuméro de l'article à acheter : ");
                 Int32.TryParse(Console.ReadLine(), out numArticle);
             } while (numArticle < 1 || numArticle > listeArticle.Count);
 

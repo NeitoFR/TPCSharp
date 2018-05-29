@@ -13,7 +13,20 @@ namespace TpNetMSIA17
         {
             listeArticleAchete = new List<Article>();
         }
-        
+
+
+        public List<Article> ListeArticleAchete
+        {
+            get
+            {
+                return listeArticleAchete;
+            }
+            set
+            {
+                listeArticleAchete = value;
+            }
+        }
+
         public string AllArticleAchete()
         {
             string liste = "";
@@ -32,10 +45,12 @@ namespace TpNetMSIA17
         {
             int numArticle;
             int quantite;
+
             do
             {
                 Console.Write("\nNuméro de l'article à acheter : ");
                 Int32.TryParse(Console.ReadLine(), out numArticle);
+
             } while (numArticle < 1 || numArticle > listeArticle.Count);
 
             Article article = listeArticle[numArticle - 1];
@@ -45,25 +60,52 @@ namespace TpNetMSIA17
                 Int32.TryParse(Console.ReadLine(), out quantite);
             } while (quantite < 1 || quantite > article.Quantite);
 
+            if (quantite == article.Quantite)
+            {
+                listeArticle.Remove(article);
+            }
+
             float achat = article.Prix * quantite;
 
-            listeArticleAchete.Add(article);
+            listeArticleAchete.Add(new Article(article.Nom, article.Prix, quantite, article.MargeBeneficiaire));
 
             article.Quantite -= quantite;
-
-            /*Console.WriteLine();
-            Console.WriteLine("Début test : ");
-            Console.WriteLine("Article : " + article.affiche());
-            Console.WriteLine("Achat = " + achat);
-            Console.WriteLine("AllArticleAchete() : " + AllArticleAchete());
-            Console.WriteLine("article.Quantite : " + article.Quantite);*/
             
             return achat;
         }
 
-        public float Vendre()
+        public float Vendre(List<Article> listeArticleAchete)
         {
-            throw new System.NotImplementedException();
+            int numArticle;
+            int quantite;
+
+            do
+            {
+                Console.Write("\nNuméro de l'article à acheter : ");
+                Int32.TryParse(Console.ReadLine(), out numArticle);
+
+            } while (numArticle < 1 || numArticle > listeArticleAchete.Count);
+
+            Article articleAchete = listeArticleAchete[numArticle - 1];
+
+            do
+            {
+                Console.Write("Nombre de quantité désirée : ");
+                Int32.TryParse(Console.ReadLine(), out quantite);
+            } while (quantite < 1 || quantite > articleAchete.Quantite);
+
+            if (quantite == articleAchete.Quantite)
+            {
+                listeArticleAchete.Remove(articleAchete);
+            }
+
+            float achat = articleAchete.Prix * quantite;
+
+            listeArticleAchete.Add(new Article(articleAchete.Nom, articleAchete.Prix, quantite, articleAchete.MargeBeneficiaire));
+
+            articleAchete.Quantite -= quantite;
+
+            return achat;
         }
     }
 }

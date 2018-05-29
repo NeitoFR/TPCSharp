@@ -48,6 +48,24 @@ namespace TpNetMSIA17
 
             } while (reponse.Key != ConsoleKey.N);
 
+            do
+            {
+                float achat = commande.Vendre(commande.ListeArticleAchete);
+
+                caisse.AjouterArgent(achat);
+                Console.WriteLine("Etat de la caisse : " + caisse.Solde);
+
+                do
+                {
+                    Console.Write("\nVoulez-vous faire une nouvelle vente ? O/N : ");
+                    reponse = Console.ReadKey();
+                } while ((reponse.Key != ConsoleKey.N) && (reponse.Key != ConsoleKey.O));
+
+                Console.WriteLine("\n******** Liste des articles ********");
+                Console.WriteLine(commande.AllArticleAchete());
+
+            } while (reponse.Key != ConsoleKey.N);
+
 
             Console.ReadKey();
         }

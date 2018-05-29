@@ -13,7 +13,20 @@ namespace TpNetMSIA17
         {
             listeArticleAchete = new List<Article>();
         }
-        
+
+
+        public List<Article> ListeArticleAchete
+        {
+            get
+            {
+                return listeArticleAchete;
+            }
+            set
+            {
+                listeArticleAchete = value;
+            }
+        }
+
         public string AllArticleAchete()
         {
             string liste = "";
@@ -42,8 +55,6 @@ namespace TpNetMSIA17
 
             Article article = listeArticle[numArticle - 1];
 
-            Console.WriteLine("Article : " + article.Nom + ", " + article.Quantite);
-
             do {
                 Console.Write("Nombre de quantité désirée : ");
                 Int32.TryParse(Console.ReadLine(), out quantite);
@@ -63,9 +74,38 @@ namespace TpNetMSIA17
             return achat;
         }
 
-        public float Vendre()
+        public float Vendre(List<Article> listeArticleAchete)
         {
-            throw new System.NotImplementedException();
+            int numArticle;
+            int quantite;
+
+            do
+            {
+                Console.Write("\nNuméro de l'article à acheter : ");
+                Int32.TryParse(Console.ReadLine(), out numArticle);
+
+            } while (numArticle < 1 || numArticle > listeArticleAchete.Count);
+
+            Article articleAchete = listeArticleAchete[numArticle - 1];
+
+            do
+            {
+                Console.Write("Nombre de quantité désirée : ");
+                Int32.TryParse(Console.ReadLine(), out quantite);
+            } while (quantite < 1 || quantite > articleAchete.Quantite);
+
+            if (quantite == articleAchete.Quantite)
+            {
+                listeArticleAchete.Remove(articleAchete);
+            }
+
+            float achat = articleAchete.Prix * quantite;
+
+            listeArticleAchete.Add(new Article(articleAchete.Nom, articleAchete.Prix, quantite, articleAchete.MargeBeneficiaire));
+
+            articleAchete.Quantite -= quantite;
+
+            return achat;
         }
     }
 }

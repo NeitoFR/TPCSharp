@@ -37,27 +37,28 @@ namespace TpNetMSIA17
             {
                 Console.Write("\nNuméro de l'article à acheter : ");
                 Int32.TryParse(Console.ReadLine(), out numArticle);
+
             } while (numArticle < 1 || numArticle > listeArticle.Count);
 
             Article article = listeArticle[numArticle - 1];
+
+            Console.WriteLine("Article : " + article.Nom + ", " + article.Quantite);
 
             do {
                 Console.Write("Nombre de quantité désirée : ");
                 Int32.TryParse(Console.ReadLine(), out quantite);
             } while (quantite < 1 || quantite > article.Quantite);
 
+            if (quantite == article.Quantite)
+            {
+                listeArticle.Remove(article);
+            }
+
             float achat = article.Prix * quantite;
 
-            listeArticleAchete.Add(article);
+            listeArticleAchete.Add(new Article(article.Nom, article.Prix, quantite, article.MargeBeneficiaire));
 
             article.Quantite -= quantite;
-
-            /*Console.WriteLine();
-            Console.WriteLine("Début test : ");
-            Console.WriteLine("Article : " + article.affiche());
-            Console.WriteLine("Achat = " + achat);
-            Console.WriteLine("AllArticleAchete() : " + AllArticleAchete());
-            Console.WriteLine("article.Quantite : " + article.Quantite);*/
             
             return achat;
         }

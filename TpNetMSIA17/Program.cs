@@ -41,8 +41,10 @@ namespace TpNetMSIA17
                     reponse = Console.ReadKey();
                 }while ((reponse.Key != ConsoleKey.N) && (reponse.Key != ConsoleKey.O));
 
-                Console.WriteLine("\n\nListe des articles de l'entrepot : ");
+                Console.WriteLine("\n\n******** Liste des articles de l'entrepot ********");
                 Console.WriteLine(entrepot.AllArticles());
+                Console.WriteLine("\n******** Liste des commandes achetées ********");
+                Console.WriteLine(commande.AllArticleAchete());
 
             } while (reponse.Key != ConsoleKey.N);
 

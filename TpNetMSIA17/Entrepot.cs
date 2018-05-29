@@ -12,6 +12,8 @@ namespace TpNetMSIA17
         public Entrepot()
         {
             listeArticle = new List<Article>();
+            for (int i = 1; i <= 10; i++)
+                listeArticle.Add(new Article("Article " + i, 12F, 5, 5F));
         }
 
         public List<Article> ListeArticle

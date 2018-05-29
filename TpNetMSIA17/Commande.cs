@@ -32,7 +32,6 @@ namespace TpNetMSIA17
         {
             int numArticle;
             int quantite;
-
             do
             {
                 Console.Write("\nNuméro de l'article à acheter : ");
